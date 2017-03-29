@@ -35,10 +35,13 @@
     "http-proxy-middleware": "0.17.3",
     "jest": "18.1.0",
     "json-loader": "0.5.4",
+    "node-sass": "^4.5.1",
+    "npm-run-all": "^4.0.2",
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
     "react-dev-utils": "^0.5.2",
+    "react-scripts": "^0.9.5",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -47,9 +50,13 @@
     "whatwg-fetch": "2.0.2"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "build-css": "node-sass src/ -o src/",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
+    "start-js": "node scripts/start.js",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "node scripts/build.js",
+    "build": "npm run build-css && node scripts/build.js",
+    "test": "node --harmony scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
