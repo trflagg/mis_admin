@@ -40,3 +40,9 @@ jspm_packages
 # My Custom Entries:
 # built css files:
 src/**/*.css
+
+#build directory
+build
+
+#editor temp files
+.#*
