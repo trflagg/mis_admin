@@ -21,24 +21,32 @@
     "css-loader": "0.26.1",
     "detect-port": "1.1.0",
     "dotenv": "2.0.0",
-    "eslint": "3.16.1",
+    "enzyme": "^2.8.0",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
     "eslint-config-react-app": "^0.6.2",
     "eslint-loader": "1.6.0",
     "eslint-plugin-flowtype": "2.21.0",
-    "eslint-plugin-import": "2.0.1",
+    "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
-    "eslint-plugin-react": "6.4.1",
+    "eslint-plugin-react": "^6.10.3",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.10.0",
     "fs-extra": "0.30.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.3",
-    "jest": "18.1.0",
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.2",
+    "jest-enzyme": "^3.0.0",
     "json-loader": "0.5.4",
+    "node-sass": "^4.5.1",
+    "npm-run-all": "^4.0.2",
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
+    "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.5.2",
+    "react-scripts": "^0.9.5",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -47,9 +55,13 @@
     "whatwg-fetch": "2.0.2"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "build-css": "node-sass src/ -o src/",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
+    "start-js": "node scripts/start.js",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "node scripts/build.js",
+    "build": "npm run build-css && node scripts/build.js",
+    "test": "node --harmony scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -58,6 +70,7 @@
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
@@ -73,7 +86,12 @@
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
-    }
+    },
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jasmine-enzyme"
+    ]
   },
   "babel": {
     "presets": [
