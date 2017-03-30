@@ -5,6 +5,8 @@ export default class ProfileListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedProfileId: '',
+
       profiles: [
         {
           id: '1234566',
@@ -18,11 +20,20 @@ export default class ProfileListContainer extends React.Component {
         },
       ],
     };
+    this.boundHandleSelectProfile = this.handleSelectProfile.bind(this);
+  }
+
+  handleSelectProfile(event) {
+    this.setState({ selectedProfileId: event.target.value });
   }
 
   render() {
     return (
-      <ProfileList profiles={this.state.profiles} />
+      <ProfileList
+        profiles={this.state.profiles}
+        selectedProfileId={this.state.selectedProfileId}
+        onSelectProfile={this.boundHandleSelectProfile}
+      />
     );
   }
 }

@@ -3,23 +3,27 @@ import './ProfileList.css';
 
 const propTypes = {
   profiles: React.PropTypes.array,
+  selectedProfileId: React.PropTypes.string,
+  onSelectProfile: React.PropTypes.func,
 };
 
 const defaultProps = {
   profiles: [],
+  selectedProfileId: '',
+  onSelectProfile: () => {},
 };
 
-function ProfileList({ profiles }) {
+function ProfileList({ profiles, selectedProfileId, onSelectProfile }) {
   const profileListItems = profiles.map(profile => (
-    <li key={profile.id}>
-      {profile.name}
-    </li>
+    <option key={profile.id} value={profile.id}>
+      {profile.name} - {profile.id}
+    </option>
   ));
 
   return (
-    <ul className="ProfileList">
+    <select value={selectedProfileId} onChange={onSelectProfile}>
       {profileListItems}
-    </ul>
+    </select>
   );
 }
 
