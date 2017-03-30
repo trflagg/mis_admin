@@ -5,7 +5,9 @@ import ProfileListContainer from './profile/ProfileListContainer';
 export default function App() {
   return (
     <div className="App">
-      Hello World
+      <header>
+        Make It So - Admin
+        </header>
       <ProfileListContainer />
     </div>
   );

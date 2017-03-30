@@ -21,9 +21,12 @@ function ProfileList({ profiles, selectedProfileId, onSelectProfile }) {
   ));
 
   return (
-    <select value={selectedProfileId} onChange={onSelectProfile}>
-      {profileListItems}
-    </select>
+    <div className="ProfileList">
+      Select Profile:
+      <select value={selectedProfileId} onChange={onSelectProfile}>
+        {profileListItems}
+      </select>
+    </div>
   );
 }
 
