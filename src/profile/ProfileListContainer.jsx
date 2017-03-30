@@ -1,11 +1,12 @@
 import React from 'react';
 import ProfileList from './ProfileList';
+import ProfileDetail from './ProfileDetail';
 
 export default class ProfileListContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedProfileId: '',
+      selectedProfile: '',
 
       profiles: [
         {
@@ -24,16 +25,27 @@ export default class ProfileListContainer extends React.Component {
   }
 
   handleSelectProfile(event) {
-    this.setState({ selectedProfileId: event.target.value });
+    const selectedProfile = this.state.profiles.find(profile => (
+      profile.id === event.target.value
+    ));
+    this.setState({ selectedProfile });
   }
 
   render() {
+    let profileDetail;
+    if (this.state.selectedProfile) {
+      profileDetail = <ProfileDetail profile={this.state.selectedProfile} />;
+    }
+
     return (
-      <ProfileList
-        profiles={this.state.profiles}
-        selectedProfileId={this.state.selectedProfileId}
-        onSelectProfile={this.boundHandleSelectProfile}
-      />
+      <div>
+        <ProfileList
+          profiles={this.state.profiles}
+          selectedProfileId={this.state.selectedProfile.id}
+          onSelectProfile={this.boundHandleSelectProfile}
+        />
+        {profileDetail}
+      </div>
     );
   }
 }
