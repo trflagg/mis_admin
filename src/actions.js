@@ -5,7 +5,7 @@ export const RECEIVE_PROFILES = 'RECEIVE_PROFILES';
 export function receiveProfiles(json) {
   return {
     type: RECEIVE_PROFILES,
-    profiles: json.data,
+    profiles: json,
   };
 }
 
