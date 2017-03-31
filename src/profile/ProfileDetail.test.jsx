@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import ProfileDetail from './ProfileDetail';
 
 const profile = {
-  id: '1234566',
+  _id: '1234566',
   name: 'Taylor',
   handiness: 'right',
 };
