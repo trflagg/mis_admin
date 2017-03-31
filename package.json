@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "fetch-jsonp": "^1.0.6",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",
@@ -47,6 +52,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.5.2",
     "react-scripts": "^0.9.5",
+    "redux-devtools": "^3.3.2",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
