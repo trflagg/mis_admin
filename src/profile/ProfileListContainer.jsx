@@ -1,51 +1,67 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getProfiles, selectProfile } from '../actions';
 import ProfileList from './ProfileList';
 import ProfileDetail from './ProfileDetail';
 
-export default class ProfileListContainer extends React.Component {
+class ProfileListContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedProfile: '',
-
-      profiles: [
-        {
-          id: '1234566',
-          name: 'Taylor',
-          handiness: 'right',
-        },
-        {
-          id: '1111',
-          name: 'User2',
-          handiness: 'left',
-        },
-      ],
-    };
     this.boundHandleSelectProfile = this.handleSelectProfile.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(getProfiles());
+  }
+
   handleSelectProfile(event) {
-    const selectedProfile = this.state.profiles.find(profile => (
-      profile.id === event.target.value
+    const { dispatch, profiles } = this.props;
+
+    /* eslint-disable no-underscore-dangle */
+    const selectedProfile = profiles.find(profile => (
+      profile._id === event.target.value
     ));
-    this.setState({ selectedProfile });
+    /* eslint-enable no-underscore-dangle */
+
+    dispatch(selectProfile(selectedProfile));
   }
 
   render() {
-    let profileDetail;
-    if (this.state.selectedProfile) {
-      profileDetail = <ProfileDetail profile={this.state.selectedProfile} />;
-    }
-
+    /* eslint-disable no-underscore-dangle */
     return (
       <div>
         <ProfileList
-          profiles={this.state.profiles}
-          selectedProfileId={this.state.selectedProfile.id}
+          profiles={this.props.profiles}
+          selectedProfileId={this.props.selectedProfile._id}
           onSelectProfile={this.boundHandleSelectProfile}
         />
-        {profileDetail}
+        { this.props.selectedProfile &&
+          <ProfileDetail profile={this.props.selectedProfile} />
+        }
       </div>
     );
+    /* eslint-enable no-underscore-dangle */
   }
 }
+
+ProfileListContainer.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  profiles: React.PropTypes.array,
+  selectedProfile: React.PropTypes.object,
+};
+
+ProfileListContainer.defaultProps = {
+  profiles: [],
+  selectedProfile: {},
+};
+
+function mapStateToProps(state) {
+  return {
+    profiles: state.profiles,
+    selectedProfile: state.profile,
+  };
+}
+
+export default connect(mapStateToProps)(ProfileListContainer);

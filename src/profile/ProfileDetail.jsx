@@ -5,12 +5,14 @@ const propTypes = {
 };
 
 function ProfileDetail({ profile }) {
+  /* eslint-disable no-underscore-dangle */
   return (
     <div className="ProfileDetail">
-      <p className="ProfileDetail--name">{profile.name} - {profile.id}</p>
+      <p className="ProfileDetail--name">{profile.name} - {profile._id}</p>
       <p className="ProfileDetail--handiness">{profile.handiness}</p>
     </div>
   );
+  /* eslint-enable no-underscore-dangle */
 }
 
 ProfileDetail.propTypes = propTypes;

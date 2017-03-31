@@ -14,11 +14,14 @@ const defaultProps = {
 };
 
 function ProfileList({ profiles, selectedProfileId, onSelectProfile }) {
+  /* eslint-disable no-underscore-dangle */
   const profileListItems = profiles.map(profile => (
-    <option key={profile.id} value={profile.id}>
-      {profile.name} - {profile.id}
+    <option key={profile._id} value={profile._id}>
+      {profile.name} - {profile._id}
     </option>
   ));
+
+  /* eslint-enable no-underscore-dangle */
 
   return (
     <div className="ProfileList">

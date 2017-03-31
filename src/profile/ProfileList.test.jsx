@@ -8,12 +8,12 @@ it('renders with no props', () => {
 
 const profiles = [
   {
-    id: '1234566',
+    _id: '1234566',
     name: 'Taylor',
     handiness: 'right',
   },
   {
-    id: '1111',
+    _id: '1111',
     name: 'User2',
     handiness: 'left',
   },
